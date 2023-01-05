@@ -60,27 +60,45 @@
 // console.log(arr7===arr6)
 
 //实现函数柯里化封装
-function curry(fn){
-  let arr= []
-  return function curried(...args){
-    arr = [...arr,...args]
-    if(arr.length>=fn.length){
-      return fn(...arr)
-    }
-    return curried
-  }
+// function curry(fn){
+//   let arr= []
+//   return function curried(...args){
+//     arr = [...arr,...args]
+//     if(arr.length>=fn.length){
+//       return fn(...arr)
+//     }
+//     return curried
+//   }
+// }
+
+
+// function sum(a, b, c, d) {
+//   return a + b + c + d;
+// }
+
+// let sum2 = curry(sum)
+// let sum3 = curry(sum)
+
+// console.log(sum2(1)(2)(2,3))
+// console.log(sum3(4)(5)(6)(5))
+
+
+//一个函数柯里化示例
+function sum(a,b){
+  return a+b
 }
 
-
-function sum(a, b, c, d) {
-  return a + b + c + d;
-}
-
-let sum2 = curry(sum)
-let sum3 = curry(sum)
-
-console.log(sum2(1)(2)(2,3))
-console.log(sum3(4)(5)(6)(5))
+console.log(sum(1,2))
 
 
+// function sum2(a){
+//   return function(b){
+//     return a+b
+//   }
+// }
+
+sum2=a=>b=>a+b
+
+
+console.log(sum2(5)(5))
 
