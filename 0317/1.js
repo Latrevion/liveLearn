@@ -84,11 +84,11 @@
 
 
 //一个函数柯里化示例
-function sum(a,b){
-  return a+b
-}
+// function sum(a,b){
+//   return a+b
+// }
 
-console.log(sum(1,2))
+// console.log(sum(1,2))
 
 
 // function sum2(a){
@@ -97,8 +97,33 @@ console.log(sum(1,2))
 //   }
 // }
 
-sum2=a=>b=>a+b
+// sum2=a=>b=>a+b
 
 
-console.log(sum2(5)(5))
+// console.log(sum2(5)(5))
 
+
+//call的实现
+var year=2021
+
+function getDate(month,day){
+  return this.year +'-'+month+'-'+day
+}
+
+// console.log(getDate(1,1));
+let obj = {year:2023}
+getDate.call(null,1,1)
+getDate.call(obj,1,1)
+getDate.apply(obj,[1,2])
+getDate.bind(obj)(1,3)
+
+//实现call
+Function.prototype.call2 =function(context,...args){
+  context = (context===window ||context===null)?window:context
+  context.__fn=this
+  let result = context.__fn(...args)
+  delete context.__fn
+  return result 
+}
+
+getDate.call2(obj,2,2)
