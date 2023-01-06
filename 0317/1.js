@@ -132,13 +132,29 @@ getDate.bind(obj)(1,3)
 
 
 //实现apply
-Function.prototype.apply2 = function(context,args){
-  context=(context===window||context===null)?window:context
-  context.__fn=this
-  let result = context.__fn(...args)
-  delete context.__fn
-  return result
+// Function.prototype.apply2 = function(context,args){
+//   context=(context===window||context===null)?window:context
+//   context.__fn=this
+//   console.log(this)
+//   let result = context.__fn(...args)
+//   delete context.__fn
+//   return result
+// }
+
+
+// getDate.apply2(obj,[3,3])
+
+
+//实现bind
+Function.prototype.apply2 = function(context,...args1){
+  context = (context===window||context===null)?window:context
+  let _this = this 
+  return function(...args2){
+    context.__fn = _this
+    let result =  context.__fn(...[...args1,...args2])
+    delete context.__fn
+    return result
+  }
 }
 
-
-getDate.apply2(obj,[3,3])
+getDate.bind2(obj)(8,8)
